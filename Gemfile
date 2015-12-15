@@ -26,6 +26,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # authentication
 gem 'devise'
 
+# two facutor authentication
+gem 'devise-two-factor'
+gem 'rqrcode-rails3'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
