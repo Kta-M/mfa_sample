@@ -3,10 +3,9 @@
 <div>
   <% if current_user.otp_required_for_login %>
     <%= button_to "Disable 2FA", users_toggle_otp_path, :method => :post %>
-    <%= raw RQRCode::render_qrcode(current_user.otp_provisioning_uri(current_user.email, issuer: "Devise-Two-Factor-Demo"),
-                                   :svg,
-                                   :level => :l,
-                                   :unit => 2) %>
+    <%= raw RQRCode::render_qrcode(
+              current_user.otp_provisioning_uri(current_user.email, issuer: "mfa-sample"),
+              :svg, level: :l, unit: 2) %>
   <% else %>
     <%= button_to "Enable 2FA", users_toggle_otp_path, :method => :post %>
   <% end %>
