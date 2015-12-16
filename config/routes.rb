@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'home#index'
 
-  post 'users/toggle_otp'
+  post 'users/enable_otp'
+  post 'users/disable_otp'
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }

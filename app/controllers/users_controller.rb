@@ -1,10 +1,13 @@
 class UsersController < ApplicationController
-  def toggle_otp
-    cu = current_user
-    cu.otp_required_for_login = !cu.otp_required_for_login
-    if cu.otp_required_for_login
-      current_user.otp_secret = User.generate_otp_secret
-    end
+  def disable_otp
+    current_user.otp_required_for_login = false
+    current_user.save!
+    redirect_to root_path
+  end
+
+  def enable_otp
+    current_user.otp_secret = User.generate_otp_secret
+    current_user.otp_required_for_login = true
     current_user.save!
     redirect_to root_path
   end
