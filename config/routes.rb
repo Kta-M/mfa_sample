@@ -9,10 +9,6 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
-  resource :two_factor_auth, only: [:new, :create, :destroy] do
-    member do
-      post :codes
-    end
-  end
+  resource :two_factor_auth, only: [:new, :create, :destroy]
 
 end

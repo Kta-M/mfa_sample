@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215053402) do
+ActiveRecord::Schema.define(version: 20151216070433) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                     default: "", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20151215053402) do
     t.string   "encrypted_otp_secret_salt"
     t.integer  "consumed_timestep"
     t.boolean  "otp_required_for_login"
+    t.text     "otp_backup_codes"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -11,9 +11,10 @@ class TwoFactorAuthsController < ApplicationController
   def create
     if current_user.validate_and_consume_otp!(params[:otp_attempt])
       current_user.otp_required_for_login = true
+      @codes = current_user.generate_otp_backup_codes!
       current_user.save!
 
-      redirect_to root_path
+      render 'codes'
     else
       @error = 'Invalid pin code'
       @qr_code = build_qr_code
@@ -25,9 +26,6 @@ class TwoFactorAuthsController < ApplicationController
   def destroy
     current_user.disable_two_factor!
     redirect_to root_path
-  end
-
-  def codes
   end
 
   private
