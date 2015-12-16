@@ -1,0 +1,37 @@
+<h1>Enable 2FA</h1>
+
+<% if @error %>
+  <div>
+    <%= @error %>
+  </div>
+<% end %>
+
+<div>
+  <%= raw RQRCode::render_qrcode(
+            current_user.otp_provisioning_uri(current_user.email, issuer: "mfa-sample"),
+            :svg, level: :l, unit: 2) %>
+</div>
+
+<div>
+  <dl>
+    <dt>Account</dt>
+    <dd><%= current_user.email %></dd>
+  </dl>
+  <dl>
+    <dt>Key</dt>
+    <dd><%= current_user.otp_secret.scan(/.{4}/).join(' ') %></dd>
+  </dl>
+  <dl>
+    <dt>Time Based</dt>
+    <dd>Yes</dd>
+  </dl>
+</div>
+
+<%= form_tag two_factor_auth_path do %>
+  <div class="field">
+    <%= label_tag :otp_attempt %><br />
+    <%= text_field_tag :otp_attempt %>
+  </div>
+
+  <%= submit_tag :submit %>
+<% end %>

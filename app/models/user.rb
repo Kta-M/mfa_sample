@@ -7,4 +7,13 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  def disable_two_factor!
+    update_attributes(
+      otp_required_for_login:    false,
+      encrypted_otp_secret:      nil,
+      encrypted_otp_secret_iv:   nil,
+      encrypted_otp_secret_salt: nil,
+    )
+  end
 end
