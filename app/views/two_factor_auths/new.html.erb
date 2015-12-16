@@ -7,9 +7,7 @@
 <% end %>
 
 <div>
-  <%= raw RQRCode::render_qrcode(
-            current_user.otp_provisioning_uri(current_user.email, issuer: "mfa-sample"),
-            :svg, level: :l, unit: 2) %>
+  <%= raw @qr_code %>
 </div>
 
 <div>
