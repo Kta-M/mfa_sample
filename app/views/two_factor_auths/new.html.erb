@@ -1,28 +1,15 @@
 <h1>Enable 2FA</h1>
 
 <% if @error %>
-  <div>
-    <%= @error %>
-  </div>
+  <div><%= @error %></div>
 <% end %>
 
-<div>
-  <%= raw @qr_code %>
-</div>
+<div><%= raw @qr_code %></div>
 
 <div>
-  <dl>
-    <dt>Account</dt>
-    <dd><%= current_user.email %></dd>
-  </dl>
-  <dl>
-    <dt>Key</dt>
-    <dd><%= current_user.otp_secret.scan(/.{4}/).join(' ') %></dd>
-  </dl>
-  <dl>
-    <dt>Time Based</dt>
-    <dd>Yes</dd>
-  </dl>
+  <p>Account : <%= current_user.email %></p>
+  <p>Key : <%= current_user.otp_secret.scan(/.{4}/).join(' ') %></p>
+  <p>Time Based : Yes</p>
 </div>
 
 <%= form_tag two_factor_auth_path do %>
